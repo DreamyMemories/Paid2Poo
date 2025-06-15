@@ -96,7 +96,7 @@ const styles = StyleSheet.create({
   contentContainer: {
     padding: 16,
     gap: 16,
-    paddingBottom: 32, // Add extra padding at the bottom for scrolling
+    paddingBottom: 32,
   },
   cardTitle: {
     fontSize: 18,
@@ -127,7 +127,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     gap: 12,
     flex: 1,
-    marginRight: 16, // Add margin to prevent overlap with the info section
+    marginRight: 16,
   },
   weeklyStatDayText: {
     width: 32,
@@ -137,7 +137,7 @@ const styles = StyleSheet.create({
     color: "#a6adc8",
   },
   weeklyStatProgress: {
-    flex: 1, // Make the progress bar take up all available space
+    flex: 1,
   },
   weeklyStatInfo: {
     alignItems: "flex-end",

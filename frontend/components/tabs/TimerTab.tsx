@@ -112,7 +112,7 @@ const styles = StyleSheet.create({
   contentContainer: {
     padding: 16,
     gap: 16,
-    paddingBottom: 32, // Add extra padding at the bottom for scrolling
+    paddingBottom: 32,
   },
   cardTitle: {
     fontSize: 18,
