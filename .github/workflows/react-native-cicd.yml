@@ -97,7 +97,6 @@ jobs:
         run: |
           YARN_CACHE_DIR=$(yarn cache dir)
           echo "dir=$YARN_CACHE_DIR" >> $GITHUB_OUTPUT
-        working-directory: ./frontend
 
       - name: 📦 Setup yarn cache
         uses: actions/cache@v3
