@@ -93,7 +93,7 @@ jobs:
       - name: 📦 Install dependencies
         run: |
           yarn install
-          yarn global add eas-cli@latest
+          yarn dlx add eas-cli@latest
         working-directory: ./frontend
 
       - name: 📱 Setup EAS build cache
