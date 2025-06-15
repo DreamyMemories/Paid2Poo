@@ -121,12 +121,13 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
-    width: "100%",
   },
   weeklyStatDay: {
     flexDirection: "row",
     alignItems: "center",
     gap: 12,
+    flex: 1,
+    marginRight: 16, // Add margin to prevent overlap with the info section
   },
   weeklyStatDayText: {
     width: 32,
@@ -136,7 +137,7 @@ const styles = StyleSheet.create({
     color: "#a6adc8",
   },
   weeklyStatProgress: {
-    width: 80,
+    flex: 1, // Make the progress bar take up all available space
   },
   weeklyStatInfo: {
     alignItems: "flex-end",
