@@ -92,12 +92,6 @@ jobs:
           cache: "yarn"
           cache-dependency-path: ./frontend/yarn.lock
 
-      - name: 📦 Get yarn cache directory path
-        id: yarn-cache-dir-path
-        run: |
-          YARN_CACHE_DIR=$(yarn cache dir)
-          echo "dir=$YARN_CACHE_DIR" >> $GITHUB_OUTPUT
-
       - name: 📦 Setup yarn cache
         uses: actions/cache@v3
         with:
