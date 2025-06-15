@@ -34,10 +34,9 @@ export function Input({ style, ...props }: InputProps) {
 
 const styles = StyleSheet.create({
   container: {
-    width: "100%",
+    flex: 1,
   },
   input: {
-    height: 40,
     borderWidth: 1,
     borderRadius: 6,
     paddingHorizontal: 12,

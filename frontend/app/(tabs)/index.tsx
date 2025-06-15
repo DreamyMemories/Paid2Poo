@@ -13,7 +13,6 @@ import { TimerTab } from "@/components/tabs/TimerTab";
 
 export default function Paid2PooApp() {
   const colorScheme = useColorScheme();
-  // Always dark mode
 
   const [isTimerRunning, setIsTimerRunning] = useState(false);
   const [currentTime, setCurrentTime] = useState("00:00");

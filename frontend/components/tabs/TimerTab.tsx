@@ -1,11 +1,11 @@
-import { useColorScheme } from "@/hooks/useColorScheme";
 import React from "react";
-import { ScrollView, StyleSheet, Text, View } from "react-native";
+import { StyleSheet, Text, View } from "react-native";
 
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { DollarSign, Pause, Play, Square } from "@/components/ui/icons";
 import { Input } from "@/components/ui/input";
+import { KeyboardAwareScrollView } from "@codler/react-native-keyboard-aware-scroll-view";
 
 export interface TimerTabProps {
   isTimerRunning: boolean;
@@ -24,13 +24,15 @@ export function TimerTab({
   hourlyWage,
   setHourlyWage,
 }: TimerTabProps) {
-  const colorScheme = useColorScheme();
-  const isDark = colorScheme === "dark";
-
   return (
-    <ScrollView
-      style={styles.container}
+    <KeyboardAwareScrollView
+      style={styles.scrollView}
       contentContainerStyle={styles.contentContainer}
+      extraScrollHeight={100}
+      enableOnAndroid={true}
+      enableAutomaticScroll={true}
+      keyboardShouldPersistTaps="handled"
+      showsVerticalScrollIndicator={false}
     >
       <Card>
         <CardHeader>
@@ -39,13 +41,11 @@ export function TimerTab({
           </CardTitle>
         </CardHeader>
         <CardContent style={styles.timerContent}>
-          {/* Timer Display */}
           <View style={styles.timerDisplay}>
             <Text style={styles.timerText}>{currentTime}</Text>
             <Text style={styles.earningsText}>💰 ${currentEarnings}</Text>
           </View>
 
-          {/* Timer Controls */}
           <View style={styles.timerControls}>
             <Button
               onPress={() => setIsTimerRunning(!isTimerRunning)}
@@ -63,7 +63,6 @@ export function TimerTab({
             </Button>
           </View>
 
-          {/* Wage Input */}
           <View style={styles.wageInputContainer}>
             <Text style={styles.inputLabel}>Hourly Wage</Text>
             <View style={styles.wageInputWrapper}>
@@ -99,12 +98,15 @@ export function TimerTab({
           </CardContent>
         </Card>
       </View>
-    </ScrollView>
+    </KeyboardAwareScrollView>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
+    flex: 1,
+  },
+  scrollView: {
     flex: 1,
   },
   contentContainer: {
