@@ -78,7 +78,7 @@ jobs:
       - name: 📦 Install dependencies
         run: |
           yarn install
-          npx --yes eas-cli@latest --version
+          npm install -g eas-cli@latest
 
       - name: 📱 Setup EAS build cache
         uses: actions/cache@v3
