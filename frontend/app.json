@@ -16,7 +16,8 @@
         "foregroundImage": "./assets/images/adaptive-icon.png",
         "backgroundColor": "#ffffff"
       },
-      "edgeToEdgeEnabled": true
+      "edgeToEdgeEnabled": true,
+      "package": "com.dreamymemories.Paid2Poo"
     },
     "web": {
       "bundler": "metro",
@@ -43,6 +44,12 @@
       "eas": {
         "projectId": "3270064e-8c69-417b-bc00-16a30c19371b"
       }
+    },
+    "runtimeVersion": {
+      "policy": "appVersion"
+    },
+    "updates": {
+      "url": "https://u.expo.dev/3270064e-8c69-417b-bc00-16a30c19371b"
     }
   }
 }
