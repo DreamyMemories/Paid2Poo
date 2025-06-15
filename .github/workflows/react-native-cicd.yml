@@ -1,3 +1,4 @@
+
 name: React Native CI/CD
 
 on:
@@ -45,30 +46,36 @@ jobs:
         with:
           node-version: "20"
           cache: "yarn"
+          cache-dependency-path: ./frontend/yarn.lock
 
       - name: 📦 Get yarn cache directory path
         id: yarn-cache-dir-path
         run: echo "dir=$(yarn cache dir)" >> $GITHUB_OUTPUT
+        working-directory: ./frontend
 
       - name: 📦 Setup yarn cache
         uses: actions/cache@v3
         with:
           path: ${{ steps.yarn-cache-dir-path.outputs.dir }}
-          key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
+          key: ${{ runner.os }}-yarn-${{ hashFiles('./frontend/yarn.lock') }}
           restore-keys: |
             ${{ runner.os }}-yarn-
 
       - name: 📦 Install dependencies
         run: yarn install
+        working-directory: ./frontend
 
       - name: 🧪 Run TypeScript check
         run: yarn tsc
+        working-directory: ./frontend
 
       - name: 🧹 Run ESLint
         run: yarn lint
+        working-directory: ./frontend
 
       - name: 🎨 Run Prettier check
         run: yarn format:check
+        working-directory: ./frontend
 
   build-and-deploy:
     needs: test
@@ -83,16 +90,18 @@ jobs:
         with:
           node-version: "20"
           cache: "yarn"
+          cache-dependency-path: ./frontend/yarn.lock
 
       - name: 📦 Get yarn cache directory path
         id: yarn-cache-dir-path
         run: echo "dir=$(yarn cache dir)" >> $GITHUB_OUTPUT
+        working-directory: ./frontend
 
       - name: 📦 Setup yarn cache
         uses: actions/cache@v3
         with:
           path: ${{ steps.yarn-cache-dir-path.outputs.dir }}
-          key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
+          key: ${{ runner.os }}-yarn-${{ hashFiles('./frontend/yarn.lock') }}
           restore-keys: |
             ${{ runner.os }}-yarn-
 
@@ -100,12 +109,13 @@ jobs:
         run: |
           yarn install
           yarn global add eas-cli@latest
+        working-directory: ./frontend
 
       - name: 📱 Setup EAS build cache
         uses: actions/cache@v3
         with:
           path: ~/.eas-build-local
-          key: ${{ runner.os }}-eas-build-local-${{ hashFiles('**/package.json') }}
+          key: ${{ runner.os }}-eas-build-local-${{ hashFiles('./frontend/package.json') }}
           restore-keys: |
             ${{ runner.os }}-eas-build-local-
 
@@ -113,6 +123,7 @@ jobs:
         run: |
           echo "EAS CLI version:"
           eas --version
+        working-directory: ./frontend
 
       - name: 📋 Fix package.json main entry
         run: |
@@ -134,6 +145,7 @@ jobs:
             echo "package.json not found"
             exit 1
           fi
+        working-directory: ./frontend
 
       - name: 📋 Update metro.config.js for SVG support
         run: |
@@ -166,6 +178,7 @@ jobs:
           else
             echo "metro.config.js not found"
           fi
+        working-directory: ./frontend
 
       - name: 📱 Build Development APK
         if: github.event.inputs.buildType == 'all' || github.event.inputs.buildType == 'dev' || github.event_name == 'push'
@@ -175,6 +188,7 @@ jobs:
           eas build --platform android --profile development --local --non-interactive --output=./app-dev.apk
         env:
           NODE_ENV: development
+        working-directory: ./frontend
 
       - name: 📱 Build Production APK
         if: github.event.inputs.buildType == 'all' || github.event.inputs.buildType == 'prod-apk' || github.event_name == 'push'
@@ -183,6 +197,7 @@ jobs:
           eas build --platform android --profile production-apk --local --non-interactive --output=./app-prod.apk
         env:
           NODE_ENV: production
+        working-directory: ./frontend
 
       - name: 📱 Build Production AAB
         if: github.event.inputs.buildType == 'all' || github.event.inputs.buildType == 'prod-aab' || github.event_name == 'push'
@@ -191,6 +206,7 @@ jobs:
           eas build --platform android --profile production --local --non-interactive --output=./app-prod.aab
         env:
           NODE_ENV: production
+        working-directory: ./frontend
 
       - name: 🚀 Publish to Expo
         if: github.event.inputs.buildType == 'all' || github.event.inputs.buildType == 'publish-expo'
@@ -198,13 +214,15 @@ jobs:
           eas update --auto
         env:
           EXPO_TOKEN: ${{ secrets.EXPO_TOKEN }}
+        working-directory: ./frontend
 
       - name: 📦 Upload build artifacts to GitHub
         uses: actions/upload-artifact@v4
         with:
           name: app-builds
           path: |
-            ./app-dev.apk
-            ./app-prod.apk
-            ./app-prod.aab
+            ./frontend/app-dev.apk
+            ./frontend/app-prod.apk
+            ./frontend/app-prod.aab
           retention-days: 7
+
