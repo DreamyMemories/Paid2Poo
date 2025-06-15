@@ -186,4 +186,4 @@ jobs:
             ${{ env.WORKING_DIRECTORY }}/app-dev.apk
             ${{ env.WORKING_DIRECTORY }}/app-prod.apk
             ${{ env.WORKING_DIRECTORY }}/app-prod.aab
-          r
+          retention-days: 7
