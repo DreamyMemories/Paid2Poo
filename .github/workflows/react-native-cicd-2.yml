@@ -78,7 +78,7 @@ jobs:
       - name: 📦 Install dependencies
         run: |
           yarn install
-          yarn global add eas-cli@latest
+          yarn dlx add eas-cli@latest
 
       - name: 📱 Setup EAS build cache
         uses: actions/cache@v3
