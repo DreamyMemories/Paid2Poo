@@ -6,10 +6,10 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import { Calendar, Clock, TrendingUp, Trophy } from "@/components/ui/icons";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
-import { TimerTab } from "@/components/common/QuickStats";
 import { AchievementsTab } from "@/components/tabs/AchievementsTab";
 import { HistoryTab } from "@/components/tabs/HistoryTab";
 import { StatsTab } from "@/components/tabs/StatsTab";
+import { TimerTab } from "@/components/tabs/TimerTab";
 
 export default function Paid2PooApp() {
   const colorScheme = useColorScheme();
