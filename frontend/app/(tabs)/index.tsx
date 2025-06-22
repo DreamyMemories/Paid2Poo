@@ -1,23 +1,18 @@
 import { useColorScheme } from "@/hooks/useColorScheme";
-import React, { useState } from "react";
+import React from "react";
 import { StyleSheet, Text, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 import { Calendar, Clock, TrendingUp, Trophy } from "@/components/ui/icons";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
+import { TimerTab } from "@/components/common/QuickStats";
 import { AchievementsTab } from "@/components/tabs/AchievementsTab";
 import { HistoryTab } from "@/components/tabs/HistoryTab";
 import { StatsTab } from "@/components/tabs/StatsTab";
-import { TimerTab } from "@/components/tabs/TimerTab";
 
 export default function Paid2PooApp() {
   const colorScheme = useColorScheme();
-
-  const [isTimerRunning, setIsTimerRunning] = useState(false);
-  const [currentTime, setCurrentTime] = useState("00:00");
-  const [hourlyWage, setHourlyWage] = useState("25.00");
-  const [currentEarnings, setCurrentEarnings] = useState("0.00");
 
   const achievements = [
     {
@@ -103,14 +98,7 @@ export default function Paid2PooApp() {
 
         <View style={styles.tabContent}>
           <TabsContent value="timer">
-            <TimerTab
-              isTimerRunning={isTimerRunning}
-              setIsTimerRunning={setIsTimerRunning}
-              currentTime={currentTime}
-              currentEarnings={currentEarnings}
-              hourlyWage={hourlyWage}
-              setHourlyWage={setHourlyWage}
-            />
+            <TimerTab />
           </TabsContent>
 
           <TabsContent value="stats">
